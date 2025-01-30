@@ -14,6 +14,7 @@
             --text: #64748B;
             --light: #F8FAFC;
             --border: #E2E8F0;
+            --container-padding: 2rem;
         }
 
         * {
@@ -27,12 +28,15 @@
             line-height: 1.6;
             color: var(--text);
             background-color: var(--light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1140px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 var(--container-padding);
         }
 
         header {
@@ -195,21 +199,96 @@
             text-decoration: underline;
         }
 
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+                padding: 0 var(--container-padding);
+            }
+        }
+
         @media (max-width: 768px) {
+            :root {
+                --container-padding: 1rem;
+            }
+
             header {
-                padding: 4rem 0;
+                padding: 3rem 0;
             }
 
             header h1 {
                 font-size: 2.5rem;
             }
 
+            header p {
+                font-size: 1.1rem;
+            }
+
             .section {
-                padding: 2rem;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
             }
 
             .tools-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tool-card {
+                padding: 1.5rem;
+            }
+
+            .steps-list li {
+                padding: 1rem;
+                padding-left: 3rem;
+            }
+
+            .note {
+                padding: 1.5rem;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+                padding: 2rem var(--container-padding);
+            }
+
+            .social-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .tool-icon {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .steps-list li::before {
+                font-size: 1.25rem;
+            }
+
+            .note strong {
+                font-size: 1.1rem;
+            }
+
+            .social-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .social-button i {
+                font-size: 1.25rem;
             }
         }
 
@@ -256,6 +335,15 @@
 
         .social-button i {
             font-size: 1.5rem;
+        }
+
+        img, video, iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
     </style>
 </head>
