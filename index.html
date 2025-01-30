@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller: Tracker de Gastos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --secondary: #1E293B;
+            --accent: #3B82F6;
+            --text: #64748B;
+            --light: #F8FAFC;
+            --border: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background-color: var(--primary);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(var(--primary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: center center;
+            opacity: 0.1;
+            background-color: var(--secondary);
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            position: relative;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--text);
+            max-width: 600px;
+            position: relative;
+        }
+
+        .section {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tool-card {
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .steps-list {
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .steps-list li {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: var(--light);
+            border-radius: 12px;
+            padding-left: 4rem;
+            counter-increment: steps;
+        }
+
+        .steps-list li::before {
+            content: counter(steps);
+            position: absolute;
+            left: 1rem;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .note {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .note strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 4rem 0;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #20bd5a;
+        }
+
+        .linkedin-button {
+            background-color: #0A66C2;
+            color: white;
+        }
+
+        .linkedin-button:hover {
+            background-color: #0958a8;
+        }
+
+        .social-button i {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h1>Taller: Tracker de Gastos con IA</h1>
+            <p>Aprende a automatizar el seguimiento de tus gastos de tarjeta de crédito utilizando inteligencia artificial</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Herramientas Necesarias</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <i class="fas fa-robot tool-icon"></i>
+                    <h3>n8n</h3>
+                    <p>Plataforma de automatización que utilizaremos para crear nuestros flujos.</p>
+                    <a href="https://n8n.io/" target="_blank">Crear cuenta en n8n</a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fas fa-brain tool-icon"></i>
+                    <h3>OpenAI</h3>
+                    <p>Plataforma de IA para el procesamiento de datos.</p>
+                    <a href="https://platform.openai.com" target="_blank">Crear cuenta en OpenAI</a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fab fa-google tool-icon"></i>
+                    <h3>Google</h3>
+                    <p>Si no tienes una cuenta de Google, necesitarás crear una.</p>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/28ZXxZSiRWc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <h3>Configuración de OpenAI</h3>
+            <ol class="steps-list">
+                <li>Ir a <a href="https://platform.openai.com" target="_blank">OpenAI</a></li>
+                <li>Sign up (botón verde arriba a la derecha)</li>
+                <li>Crear usuario y contraseña</li>
+                <li>Verificar correo</li>
+                <li>Crear una organización (pueden poner 'personal' si quieren)</li>
+                <li>En invitar a alguien pueden poner 'I'll invite my team later'</li>
+                <li>En 'Make your first API call' pueden poner 'I'll do this later'</li>
+                <li>En add some API credits compren lo mínimo. $5 está bien</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Recomendaciones</h2>
+            <div class="note">
+                <strong>Configuración Ideal</strong>
+                <p>Ideal, aunque no es requisito, que tengan dos pantallas: una para ver lo que yo voy haciendo y otra para que ustedes vayan haciéndolo también.</p>
+            </div>
+
+            <div class="note">
+                <strong>La más importante</strong>
+                <p>Es un flujo un poco técnico. No se preocupen por eso, yo voy a ir explicando todo. Sin embargo, sí es indispensable que estén 100% enfocados en lo que está pasando. Si solo una cosa, por pequeña que sea, queda mal, es posible que el flujo les falle.</p>
+            </div>
+
+            <p>En todo caso, si falla, no se preocupen que vamos a tener sesión de preguntas y yo les voy a dar el flujo terminado y funcional al final para que puedan compararlo con el de ustedes y arreglar lo que corresponda.</p>
+            
+            <p>También, recibiré cualquier pregunta que tengan por interno, tanto estos días como después de la sesión.</p>
+        </div>
+
+        <div class="section">
+            <h2>Recordatorio sobre la sesión</h2>
+            <div class="note">
+                <strong>Objetivo</strong>
+                <p>Si bien vamos a montar un tracker de gastos de tarjeta, y ese flujo quedará funcional, la idea acá, más allá de eso, es que se enfrenten a montar un flujo de estos y puedan luego hacerlo para diferentes casos de uso.</p>
+            </div>
+
+            <div class="note">
+                <p>También, importante que sepan que vamos a dejar el flujo imperfecto. La idea es que ustedes lo puedan pulir y yo los voy a guiar sobre cómo hacerlo.</p>
+            </div>
+
+            <div class="note">
+                <p>Es probable que a algunos no les corra el flujo al terminar la sesión. No pasa nada. Es normal, yo los voy a ayudar y luego yo les voy a pasar el flujo funcional para que lo puedan corregir y encontrar los errores.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-buttons">
+        <a href="https://wa.me/573187033333" target="_blank" class="social-button whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+            <span>¿Necesitas ayuda? Escríbeme</span>
+        </a>
+        <a href="https://www.linkedin.com/in/zarruk/" target="_blank" class="social-button linkedin-button">
+            <i class="fab fa-linkedin"></i>
+            <span>Sígueme en LinkedIn</span>
+        </a>
+    </div>
+</body>
+</html> 
