@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0F172A;
-            --secondary: #1E293B;
+            --primary: #1E3A8A;
+            --secondary: #2563EB;
             --accent: #3B82F6;
-            --text: #64748B;
+            --text: #1F2937;
             --light: #F8FAFC;
             --border: #E2E8F0;
             --container-padding: 2rem;
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
         }
 
         * {
@@ -40,8 +42,8 @@
         }
 
         header {
-            background-color: var(--primary);
-            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 8rem 0 6rem;
             margin-bottom: 4rem;
             position: relative;
             overflow: hidden;
@@ -56,9 +58,9 @@
             background-image: 
                 linear-gradient(var(--primary) 1px, transparent 1px),
                 linear-gradient(90deg, var(--primary) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-size: 40px 40px;
             background-position: center center;
-            opacity: 0.1;
+            opacity: 0.05;
             background-color: var(--secondary);
         }
 
@@ -69,11 +71,12 @@
             margin-bottom: 1.5rem;
             line-height: 1.1;
             position: relative;
+            letter-spacing: -1px;
         }
 
         header p {
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.25rem;
-            color: var(--text);
             max-width: 600px;
             position: relative;
         }
@@ -81,14 +84,16 @@
         .section {
             background: white;
             border-radius: 24px;
-            padding: 3rem;
+            padding: 4rem;
             margin-bottom: 2rem;
             border: 1px solid var(--border);
             transition: transform 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
         .section:hover {
             transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
         }
 
         .tools-grid {
@@ -99,33 +104,60 @@
         }
 
         .tool-card {
-            padding: 2rem;
-            background: var(--light);
-            border-radius: 16px;
-            transition: all 0.3s ease;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .tool-card:hover {
-            background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .tool-card:hover::before {
+            opacity: 1;
         }
 
         .tool-icon {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
 
         h2 {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         h3 {
             font-size: 1.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
+            letter-spacing: -0.3px;
         }
 
         .video-container {
@@ -154,29 +186,38 @@
 
         .steps-list li {
             position: relative;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            background: var(--light);
-            border-radius: 12px;
-            padding-left: 4rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            padding-left: 5rem;
             counter-increment: steps;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
         }
 
         .steps-list li::before {
             content: counter(steps);
             position: absolute;
-            left: 1rem;
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.5rem;
+            left: 1.25rem;
+            top: 1.75rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .note {
-            background: var(--light);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid var(--accent);
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-left: 6px solid var(--accent);
+            box-shadow: var(--card-shadow);
         }
 
         .note strong {
@@ -187,7 +228,7 @@
         }
 
         a {
-            color: var(--accent);
+            color: var(--secondary);
             text-decoration: none;
             font-weight: 500;
             display: inline-flex;
@@ -196,7 +237,7 @@
         }
 
         a:hover {
-            text-decoration: underline;
+            color: var(--primary);
         }
 
         @media (max-width: 1200px) {
@@ -212,52 +253,83 @@
             }
 
             header {
-                padding: 3rem 0;
+                padding: 2rem 0;
+                margin-bottom: 2rem;
             }
 
             header h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                line-height: 1.2;
             }
 
             header p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .section {
                 padding: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
+                margin-bottom: 1rem;
+                border-radius: 16px;
             }
 
             .tools-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
+                margin: 1.5rem 0;
             }
 
             .tool-card {
                 padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .video-container {
+                margin: 1.5rem 0;
+                border-radius: 12px;
             }
 
             .steps-list li {
-                padding: 1rem;
-                padding-left: 3rem;
+                padding: 1.25rem;
+                padding-left: 3.5rem;
+                margin-bottom: 0.75rem;
+                border-radius: 12px;
+            }
+
+            .steps-list li::before {
+                left: 1rem;
+                top: 1.25rem;
+                width: 2rem;
+                height: 2rem;
+                font-size: 1rem;
             }
 
             .note {
-                padding: 1.5rem;
+                padding: 1.25rem;
+                margin: 1rem 0;
+                border-radius: 12px;
+                border-left-width: 4px;
             }
 
             .social-buttons {
                 flex-direction: column;
+                gap: 0.75rem;
                 padding: 2rem var(--container-padding);
             }
 
             .social-button {
                 width: 100%;
-                justify-content: center;
+                padding: 1rem;
+                font-size: 0.9rem;
+                border-radius: 12px;
             }
         }
 
@@ -292,6 +364,33 @@
             }
         }
 
+        @media (max-width: 360px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            .tool-card {
+                padding: 1.25rem;
+            }
+
+            .tool-icon {
+                font-size: 1.5rem;
+            }
+
+            .social-button {
+                padding: 0.875rem;
+                font-size: 0.85rem;
+            }
+
+            .social-button i {
+                font-size: 1.25rem;
+            }
+
+            .note strong {
+                font-size: 1rem;
+            }
+        }
+
         .social-buttons {
             display: flex;
             gap: 1rem;
@@ -303,16 +402,18 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 500;
+            padding: 1.25rem 2.5rem;
+            border-radius: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .social-button:hover {
-            transform: translateY(-3px);
-            text-decoration: none;
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
         }
 
         .whatsapp-button {
@@ -345,6 +446,53 @@
         * {
             -webkit-tap-highlight-color: transparent;
         }
+
+        /* Mejorar contraste en las tarjetas */
+        .tool-card p {
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Mejorar contraste en las notas */
+        .note p {
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Ajustes para evitar desbordamiento de texto */
+        * {
+            word-wrap: break-word;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+        }
+
+        /* Ajustes para mejor tacto en móviles */
+        @media (hover: none) {
+            .tool-card:hover,
+            .section:hover,
+            .social-button:hover {
+                transform: none;
+            }
+
+            a, button {
+                cursor: default;
+            }
+        }
+
+        /* Asegurar que los elementos táctiles sean suficientemente grandes */
+        @media (max-width: 768px) {
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .steps-list li {
+                min-height: 44px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -361,10 +509,24 @@
             <h2>Herramientas Necesarias</h2>
             <div class="tools-grid">
                 <div class="tool-card">
+                    <i class="fas fa-robot tool-icon"></i>
+                    <h3>n8n</h3>
+                    <p>Plataforma de automatización que utilizaremos para crear nuestros flujos de trabajo.</p>
+                    <a href="https://n8n.io/" target="_blank">Crear cuenta en n8n</a>
+                </div>
+
+                <div class="tool-card">
                     <i class="fas fa-brain tool-icon"></i>
                     <h3>OpenAI</h3>
                     <p>Plataforma de IA para el procesamiento de datos.</p>
                     <a href="https://platform.openai.com" target="_blank">Crear cuenta en OpenAI</a>
+                </div>
+
+                <div class="tool-card">
+                    <i class="fab fa-whatsapp tool-icon"></i>
+                    <h3>Wassenger</h3>
+                    <p>Plataforma para la integración con WhatsApp. Asegúrate de tener tu WhatsApp conectado antes del taller.</p>
+                    <a href="https://wassenger.com/" target="_blank">Crear cuenta en Wassenger</a>
                 </div>
 
                 <div class="tool-card">
